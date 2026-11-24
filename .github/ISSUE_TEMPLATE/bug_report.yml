@@ -1,0 +1,45 @@
+name: Bug report
+description: A server, log, restart, or window behavior that is wrong.
+title: "[Bug] "
+labels: ["bug"]
+body:
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened
+      description: What you expected, and what the app did instead.
+    validations:
+      required: true
+  - type: textarea
+    id: bat
+    attributes:
+      label: How the server is started
+      description: Paste the BAT file with memory flags and player names removed. Say whether it ends in pause.
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: MC Server Hub version
+      placeholder: "1.0.0"
+    validations:
+      required: true
+  - type: input
+    id: windows
+    attributes:
+      label: Windows version
+      placeholder: "Windows 11 24H2"
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant log lines
+      description: From the console view or logs/supervisor.log. Remove player names and addresses.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checklist
+      options:
+        - label: I can reproduce this with a BAT file I am willing to describe.
+          required: true

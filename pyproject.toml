@@ -1,0 +1,39 @@
+[build-system]
+requires = ["setuptools>=69"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mc-server-hub"
+version = "1.0.0"
+description = "Windows desktop hub for running and watching multiple Minecraft servers."
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.11"
+keywords = ["minecraft", "server", "windows", "pyside6", "process-manager"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Environment :: Win32 (MS Windows)",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: Microsoft :: Windows :: Windows 10",
+    "Operating System :: Microsoft :: Windows :: Windows 11",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Games/Entertainment",
+    "Topic :: System :: Monitoring",
+]
+dependencies = [
+    "PySide6>=6.6.3",
+    "psutil>=5.9.0",
+    "pywinpty>=2.0.13",
+]
+
+[project.optional-dependencies]
+build = ["pyinstaller>=6.3.0"]
+
+[project.scripts]
+mc-server-hub = "mc_server_hub.main:main"
+
+[tool.setuptools.packages.find]
+include = ["mc_server_hub*"]
+exclude = ["tests*"]

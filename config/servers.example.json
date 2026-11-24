@@ -1,0 +1,17 @@
+{
+  "servers": [
+    {
+      "id": "example-survival",
+      "name": "Survival",
+      "bat_path": "C:/mc/survival/start.bat",
+      "working_directory": "C:/mc/survival",
+      "auto_restart": true,
+      "restart_delay_seconds": 5,
+      "max_restart_attempts": 3,
+      "unlimited_restarts": false,
+      "auto_start": false,
+      "color": "#4FC1FF",
+      "log_folder": "Survival"
+    }
+  ]
+}

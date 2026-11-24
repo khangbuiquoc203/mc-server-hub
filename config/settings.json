@@ -1,0 +1,13 @@
+{
+  "theme": "dark",
+  "default_restart_delay": 5,
+  "default_max_restart_attempts": 3,
+  "log_retention_days": 14,
+  "confirm_before_stop": true,
+  "minimize_to_tray": false,
+  "close_behavior": "ask",
+  "max_console_lines": 5000,
+  "stable_uptime_reset_seconds": 120,
+  "graceful_stop_timeout_seconds": 45,
+  "startup_grace_seconds": 30
+}
