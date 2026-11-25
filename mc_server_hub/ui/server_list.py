@@ -32,14 +32,20 @@ class ServerRow(QWidget):
         self.name.setObjectName("RowName")
         self.status = QLabel()
         self.status.setObjectName("RowMeta")
+        self.crashes = QLabel()
+        self.crashes.setObjectName("RowMeta")
         self.meta = QLabel()
         self.meta.setObjectName("RowMeta")
+        self.meta.setWordWrap(True)
         layout.addWidget(self.name)
         layout.addWidget(self.status)
+        layout.addWidget(self.crashes)
         layout.addWidget(self.meta)
+        self.config: dict = {}
         self.runtime: dict = {}
 
     def apply(self, config: dict, runtime: dict) -> None:
+        self.config = config
         self.runtime = runtime
         self.name.setText(config.get("name", "Server"))
         self.name.setStyleSheet(f"color: {config.get('color', '#4FC1FF')};")
@@ -62,17 +68,21 @@ class ServerRow(QWidget):
         uptime = None
         if isinstance(started, (int, float)) and status in {"RUNNING", "STARTING", "STOPPING"}:
             uptime = time.time() - started
-        attempts = runtime.get("restart_attempts", 0)
+        attempts = int(runtime.get("restart_attempts") or 0)
+        if self.config.get("unlimited_restarts"):
+            limit = "unlimited"
+        else:
+            limit = str(self.config.get("max_restart_attempts", 0))
+        self.crashes.setText(f"Crashes {attempts}/{limit}")
+        self.crashes.setStyleSheet("color: #F14C4C;" if attempts else "color: #8A8A8A;")
         error = runtime.get("last_error") or ""
         meta = (
             f"Up {format_duration(uptime)}   "
             f"RAM {format_bytes(runtime.get('memory_bytes') or 0)}   "
             f"CPU {float(runtime.get('cpu_percent') or 0):.0f}%"
         )
-        if attempts:
-            meta += f"   Restarts {attempts}"
         if error and status in {"ERROR", "CRASHED", "RESTARTING"}:
-            meta += f"\n{error}"
+            meta = f"{error}\n{meta}"
         self.meta.setText(meta)
 
 
